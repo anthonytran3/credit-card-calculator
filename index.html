@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Processing Fee Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="Square_LogoLockup_Black.png" alt="Square Logo" class="logo">
+        </div>
+        
+        <h1>Credit Card Processing Fee Calculator</h1>
+        <p class="subtitle">Find out your processing fees with few clicks</p>
+
+        <div class="calculator-container">
+            <!-- Transaction Toggle -->
+            <div class="toggle-container">
+                <label class="toggle-label">
+                    <span>Include Transaction Analysis</span>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="transactionToggle">
+                        <span class="toggle-slider"></span>
+                    </div>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>Choose your Calculator:</label>
+                <div class="calculator-options">
+                    <button class="calc-button active" data-type="effective">Effective Rate</button>
+                    <button class="calc-button" data-type="total">Total Fee</button>
+                </div>
+            </div>
+
+            <!-- Effective Rate Calculator (Default) -->
+            <div id="effectiveRateInputs" class="calculator-inputs">
+                <div class="input-group">
+                    <label for="monthlySales">Enter your monthly sales ($)</label>
+                    <input type="number" id="monthlySales" placeholder="Enter amount" min="0" step="0.01">
+                </div>
+                <div class="input-group transaction-input hidden">
+                    <label for="monthlyTransactions">Number of monthly transactions</label>
+                    <input type="number" id="monthlyTransactions" placeholder="Enter number of transactions" min="0" step="1">
+                </div>
+                <div class="input-group">
+                    <label for="processingFeeAmount">Enter total processing fee ($)</label>
+                    <input type="number" id="processingFeeAmount" placeholder="Enter processing fee" min="0" step="0.01">
+                </div>
+            </div>
+
+            <!-- Total Fee Calculator -->
+            <div id="totalFeeInputs" class="calculator-inputs hidden">
+                <div class="input-group">
+                    <label for="totalSales">Enter your total sales ($)</label>
+                    <input type="number" id="totalSales" placeholder="Enter amount" min="0" step="0.01">
+                </div>
+                <div class="input-group transaction-input hidden">
+                    <label for="totalTransactions">Number of transactions</label>
+                    <input type="number" id="totalTransactions" placeholder="Enter number of transactions" min="0" step="1">
+                </div>
+                <div class="input-group">
+                    <label for="feePercentage">Enter percentage fee (%)</label>
+                    <input type="number" id="feePercentage" placeholder="Enter percentage" min="0" step="0.01">
+                    <p class="input-help">Example: For 2.9%, enter 2.9</p>
+                </div>
+                <div class="input-group transaction-input hidden">
+                    <label for="perTransactionFee">Per transaction fee ($)</label>
+                    <input type="number" id="perTransactionFee" placeholder="Enter per transaction fee" min="0" step="0.01">
+                    <p class="input-help">Example: For $0.30 per transaction, enter 0.30</p>
+                </div>
+            </div>
+
+            <button id="calculateBtn" class="calculate-btn">Calculate</button>
+
+            <!-- Results Section -->
+            <div class="results" id="results">
+                <!-- Effective Rate Results -->
+                <div id="effectiveRateResults">
+                    <div class="result-item">
+                        <span class="result-label">Effective Rate:</span>
+                        <span class="result-value" id="effectiveRateValue">0.00%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Processing Fee:</span>
+                        <span class="result-value" id="effectiveProcessingFee">$0.00</span>
+                    </div>
+                    <div class="result-item transaction-result hidden">
+                        <span class="result-label">Average Fee Per Transaction:</span>
+                        <span class="result-value" id="effectivePerTransaction">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Total Fee Results -->
+                <div id="totalFeeResults" class="hidden">
+                    <div class="result-item">
+                        <span class="result-label">Percentage-based Fee:</span>
+                        <span class="result-value" id="percentageFee">$0.00</span>
+                    </div>
+                    <div class="result-item transaction-result hidden">
+                        <span class="result-label">Transaction-based Fee:</span>
+                        <span class="result-value" id="transactionFee">$0.00</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Processing Fee:</span>
+                        <span class="result-value" id="totalProcessingFee">$0.00</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Net Amount:</span>
+                        <span class="result-value" id="netAmount">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
