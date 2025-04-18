@@ -12,14 +12,22 @@
             <img src="Square_LogoLockup_Black.png" alt="Square Logo" class="logo">
         </div>
         
-        <h1>Credit Card Processing Fee Calculator</h1>
-        <p class="subtitle">Find out your processing fees with a few clicks</p>
+        <h1>Processing Fee Calculator</h1>
+        <p class="subtitle">Calculate your savings with Square</p>
 
         <div class="calculator-container">
+            <div class="input-group">
+                <label>Choose a Calculator:</label>
+                <div class="calculator-options">
+                    <button class="calc-button active" data-type="effective">Effective Rate</button>
+                    <button class="calc-button" data-type="total">Total Fee</button>
+                </div>
+            </div>
+
             <!-- Transaction Toggle -->
-            <div class="toggle-container">
+            <div class="toggle-container hidden" id="transactionToggleContainer">
                 <label class="toggle-label">
-                    <span>Include Transaction Analysis</span>
+                    <span>Include Per Transaction Fee</span>
                     <div class="toggle-switch">
                         <input type="checkbox" id="transactionToggle">
                         <span class="toggle-slider"></span>
@@ -27,26 +35,18 @@
                 </label>
             </div>
 
-            <div class="input-group">
-                <label>Choose your Calculator:</label>
-                <div class="calculator-options">
-                    <button class="calc-button active" data-type="effective">Effective Rate</button>
-                    <button class="calc-button" data-type="total">Total Fee</button>
-                </div>
-            </div>
-
             <!-- Effective Rate Calculator (Default) -->
             <div id="effectiveRateInputs" class="calculator-inputs">
                 <div class="input-group">
-                    <label for="monthlySales">Enter your total sales ($)</label>
+                    <label for="monthlySales">Total Sales ($)</label>
                     <input type="number" id="monthlySales" placeholder="Enter amount" min="0" step="0.01">
                 </div>
                 <div class="input-group transaction-input hidden">
-                    <label for="monthlyTransactions">Number of monthly transactions</label>
+                    <label for="monthlyTransactions">Number of Transactions</label>
                     <input type="number" id="monthlyTransactions" placeholder="Enter number of transactions" min="0" step="1">
                 </div>
                 <div class="input-group">
-                    <label for="processingFeeAmount">Enter total processing fee ($)</label>
+                    <label for="processingFeeAmount">Total Processing Fee ($)</label>
                     <input type="number" id="processingFeeAmount" placeholder="Enter processing fee" min="0" step="0.01">
                 </div>
             </div>
@@ -54,26 +54,32 @@
             <!-- Total Fee Calculator -->
             <div id="totalFeeInputs" class="calculator-inputs hidden">
                 <div class="input-group">
-                    <label for="totalSales">Enter your total sales ($)</label>
+                    <label for="totalSales">Total Sales ($)</label>
                     <input type="number" id="totalSales" placeholder="Enter amount" min="0" step="0.01">
                 </div>
                 <div class="input-group transaction-input hidden">
-                    <label for="totalTransactions">Number of transactions</label>
+                    <label for="totalTransactions">Number of Transactions</label>
                     <input type="number" id="totalTransactions" placeholder="Enter number of transactions" min="0" step="1">
                 </div>
                 <div class="input-group">
-                    <label for="feePercentage">Enter percentage fee (%)</label>
+                    <label for="feePercentage">Percentage Fee (%)</label>
                     <input type="number" id="feePercentage" placeholder="Enter percentage" min="0" step="0.01">
                     <p class="input-help">Example: For 2.9%, enter 2.9</p>
                 </div>
                 <div class="input-group transaction-input hidden">
-                    <label for="perTransactionFee">Per transaction fee ($)</label>
+                    <label for="perTransactionFee">Per Transaction Fee ($)</label>
                     <input type="number" id="perTransactionFee" placeholder="Enter per transaction fee" min="0" step="0.01">
                     <p class="input-help">Example: For $0.30 per transaction, enter 0.30</p>
                 </div>
             </div>
 
             <button id="calculateBtn" class="calculate-btn">Calculate</button>
+
+            <!-- Save Fee Buttons -->
+            <div class="save-fee-buttons">
+                <button id="saveCurrentFeeBtn" class="save-fee-btn">Save as Current Rate</button>
+                <button id="saveNewFeeBtn" class="save-fee-btn">Save as New Rate</button>
+            </div>
 
             <!-- Results Section -->
             <div class="results" id="results">
@@ -90,6 +96,22 @@
                     <div class="result-item transaction-result hidden">
                         <span class="result-label">Average Fee Per Transaction:</span>
                         <span class="result-value" id="effectivePerTransaction">$0.00</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Net Amount:</span>
+                        <span class="result-value" id="effectiveNetAmount">$0.00</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Current Rate:</span>
+                        <span class="result-value" id="effectiveCurrentFee">0.00%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">New Rate:</span>
+                        <span class="result-value" id="effectiveNewFee">0.00%</span>
+                    </div>
+                    <div class="result-item estimated-savings">
+                        <span class="result-label">Processing Fee Savings:</span>
+                        <span class="result-value" id="effectiveEstimatedSavings">$0.00</span>
                     </div>
                 </div>
 
@@ -111,9 +133,22 @@
                         <span class="result-label">Net Amount:</span>
                         <span class="result-value" id="netAmount">$0.00</span>
                     </div>
+                    <div class="result-item">
+                        <span class="result-label">Current Fee:</span>
+                        <span class="result-value" id="totalCurrentFee">$0.00</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">New Fee:</span>
+                        <span class="result-value" id="totalNewFee">$0.00</span>
+                    </div>
+                    <div class="result-item estimated-savings">
+                        <span class="result-label">Estimated Savings:</span>
+                        <span class="result-value" id="totalEstimatedSavings">$0.00</span>
+                    </div>
                 </div>
             </div>
         </div>
+        <p class="creator-credit">@anthonytran</p>
     </div>
     <script src="script.js"></script>
 </body>
